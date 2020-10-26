@@ -5,13 +5,15 @@
 % Albany Medical College
 
 %% upload the data into workspace
-directory = '';    % enter the directory of your data and image
-load('directory\data.mat')
+% directory = '';    % enter the directory of your data and image
+% load('directory\data.mat')
+load('data.mat')
 %% plot
 temp = case1;
 
 figure
-img = imread('directory\human.jpg');
+% img = imread('directory\human.jpg');
+img = imread('human.jpg');
 pos = zeros(1204,1000); % i defined a matrix for the muscle positions
 
 % Muscle Positions y-x

@@ -1,5 +1,6 @@
 % Load the file
-img = imread('directory\temperature.png');
+% img = imread('directory\temperature.png');
+img = imread('temperature.png');
 heat_map = zeros(600,800);
 
 % Assign values to the location on the map
