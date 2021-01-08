@@ -1,0 +1,51 @@
+.formatting {
+    padding-left: 50%;
+    width: 150%;
+    margin-top: 20px;
+}
+
+.author-container {
+    display: flex;
+    flex-direction: column;
+}
+
+
+h1, h2, h3, h4 {
+    text-align: center;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+h4 {
+    font-size: 16.5px;
+}
+
+p {
+    font-size: 16px;
+}
+
+img {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.behal {
+    justify-content: center;
+    // preserves image aspect ratio
+    object-fit: contain;
+    height: 200px;
+}
+
+.telkes {
+    justify-content: center;
+    object-fit: contain;
+    height: 200px;
+}
+
+.pilitsis {
+    justify-content: center;
+    object-fit: contain;
+    height: 200px;
+}

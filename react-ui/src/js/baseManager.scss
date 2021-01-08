@@ -1,0 +1,37 @@
+.headerStyle {
+    position: 'fixed'; 
+    z-index: 1; 
+    width: '100%';
+    margin-top: "55px";
+    background-color: #1a4372;
+    color: rgb(255, 255, 255);
+}
+
+.menuStyle {
+    background-color: #1a4372;
+    color: rgb(255, 255, 255);
+}
+
+.option1 {
+    background-color: #7e49c3;
+    color: rgb(255, 255, 255);
+    width: 33.33%;
+    text-align: left;
+    font-size: 16px;
+}
+
+.option2 {
+    background-color: #bf7878;
+    color: rgb(255, 255, 255);
+    width: 33.33%;
+    text-align: center;
+    font-size: 16px;
+}
+
+.option3 {
+    background-color: rgb(191, 63, 63);
+    color: rgb(255, 255, 255);
+    width: 33.33%;
+    text-align: right;
+    font-size: 16px;
+}

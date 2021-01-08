@@ -1,0 +1,20 @@
+.top-level {
+    margin-top: 50px;
+}
+
+.ant-form-item-label > label {
+    position: relative;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 32px;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 16px;
+}
+
+span.ant-radio + * {
+    padding-right: 8px;
+    padding-left: 8px;
+    font-size: 16px;
+}

@@ -1,0 +1,74 @@
+from django.shortcuts import render
+
+# Create your views here.
+from django.http import HttpResponse
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from send_values.api.send_to_db import insert_db
+
+import requests
+from urllib.parse import urlparse
+
+import sys
+import json
+
+import requests
+from rest_framework.views import APIView
+
+import base64
+
+# for get requests use: http://127.0.0.1:8000/values/stim/
+# filtering works - example: http://127.0.0.1:8000/values/stim/?colormapOption=jet&contactNum=4
+
+# http://127.0.0.1:8000/processlink/postdata
+@api_view(['POST'])
+def postData(request):
+    print(request.method)
+    print(request.data)
+
+    requestDict = request.data
+
+    jobID = requestDict["jobID"]
+    contactNum = requestDict["contactNum"]
+    currentVal = float(requestDict["currentVal"])
+    bodySide = requestDict["bodySide"]
+    contactSymmetry = requestDict["contactSymmetry"]
+    signalingProcMethod = requestDict["signalingProcMethod"]
+    normalizationMethod = requestDict["normalizationMethod"]
+    colormapOption = requestDict["colormapOption"]
+
+    requestDict["currentVal"] = currentVal
+
+    print(requestDict)
+
+    insert_db(requestDict)
+
+    return Response(
+        data=requestDict,
+        status=status.HTTP_200_OK
+    )
+
+# http://127.0.0.1:8000/processlink/postimage
+@api_view(['POST'])
+def postImage(request):
+    print(request.method)
+    print(request.data)
+
+    imageDict = request.data
+
+    '''
+    imageDict = {
+        "jobID": "88911b5b-9611-4387-81e3-60225211257d",
+        "imageData": "UEQ5NGJXd2dkbVZ5YzJsdmJqMGlNUzR3SWlCbGJtTnZaR2x1WnowaWRYUm1MVGdpUHo0TkNqd2hMUzBnUjJWdVpYSmhkRzl5T2lCQlpHOWlaU0JKYkd4MWMzUnlZWFJ2Y2lBeE5pNHdMakFzSUZOV1J5QkZlSEJ2Y25RZ1VHeDFaeTFKYmlBdUlGTldSeUJXWlhKemFXOXVPaUEyTGpBd0lFSjFhV3hrSURBcElDQXRMVDROQ2p3aFJFOURWRmxRUlNCemRtY2dVRlZDVEVsRElDSXRMeTlYTTBNdkwwUlVSQ0JUVmtjZ01TNHhMeTlGVGlJZ0ltaDBkSEE2THk5M2QzY3Vkek11YjNKbkwwZHlZWEJvYVdOekwxTldSeTh4TGpFdlJGUkVMM04yWnpFeExtUjBaQ0krRFFvOGMzWm5JSFpsY25OcGIyNDlJakV1TVNJZ2FXUTlJa3hoZVdWeVh6RWlJSGh0Ykc1elBTSm9kSFJ3T2k4dmQzZDNMbmN6TG05eVp5OHlNREF3TDNOMlp5SWdlRzFzYm5NNmVHeHBibXM5SW1oMGRIQTZMeTkzZDNjdWR6TXViM0puTHpFNU9Ua3ZlR3hwYm1zaUlIZzlJakJ3ZUNJZ2VUMGlNSEI0SWcwS0NTQjNhV1IwYUQwaU1USTJjSGdpSUdobGFXZG9kRDBpTVRJMmNIZ2lJSFpwWlhkQ2IzZzlJakFnTUNBeE1qWWdNVEkySWlCbGJtRmliR1V0WW1GamEyZHliM1Z1WkQwaWJtVjNJREFnTUNBeE1qWWdNVEkySWlCNGJXdzZjM0JoWTJVOUluQnlaWE5sY25abElqNE5DanhuUGcwS0NUeHlaV04wSUhnOUlqRXVNRGsxSWlCNVBTSTVPQzR5TWpRaUlIZHBaSFJvUFNJeE1qTXVPREVpSUdobGFXZG9kRDBpTVRrdU1qYzFJaTgrRFFvSlBISmxZM1FnZUQwaU1TNHdPVFVpSUhrOUlqZzFMamMwSWlCM2FXUjBhRDBpTVRJekxqZ3hJaUJvWldsbmFIUTlJalV1TWpBMUlpOCtEUW9KUEhCaGRHZ2daRDBpVFRFNExqUXdOQ3c1TlM0M01qRmpNQzQzTmpjc01Dd3hMak00T1Mwd0xqWXlNeXd4TGpNNE9TMHhMak01Y3kwd0xqWXlNaTB4TGpNNE9DMHhMak00T1MweExqTTRPRWd6TGpRNE1XTXRNQzQzTmpjc01DMHhMak00T0N3d0xqWXlNUzB4TGpNNE9Dd3hMak00T0EwS0NRbHpNQzQyTWpJc01TNHpPU3d4TGpNNE9Dd3hMak01U0RFNExqUXdOSG9pTHo0TkNnazhjR0YwYUNCa1BTSk5ORFF1TkRNekxEazFMamN5TVdNd0xqYzJOeXd3TERFdU16ZzRMVEF1TmpJekxERXVNemc0TFRFdU16bHpMVEF1TmpJeUxURXVNemc0TFRFdU16ZzRMVEV1TXpnNFNESTVMalV4WXkwd0xqYzJOeXd3TFRFdU16ZzVMREF1TmpJeExURXVNemc1TERFdU16ZzREUW9KQ1hNd0xqWXlNaXd4TGpNNUxERXVNemc1TERFdU16bElORFF1TkRNemVpSXZQZzBLQ1R4d1lYUm9JR1E5SWswM01DNDBOakVzT1RVdU56SXhZekF1TnpZM0xEQXNNUzR6T0RndE1DNDJNak1zTVM0ek9EZ3RNUzR6T1hNdE1DNDJNakl0TVM0ek9EZ3RNUzR6T0RndE1TNHpPRGhJTlRVdU5UTTVZeTB3TGpjMk55d3dMVEV1TXpnNExEQXVOakl4TFRFdU16ZzRMREV1TXpnNERRb0pDWE13TGpZeU1pd3hMak01TERFdU16ZzRMREV1TXpsSU56QXVORFl4ZWlJdlBnMEtDVHh3WVhSb0lHUTlJazA1Tmk0ME9TdzVOUzQzTWpGak1DNDNOamNzTUN3eExqTTRPUzB3TGpZeU15d3hMak00T1MweExqTTVjeTB3TGpZeU1pMHhMak00T0MweExqTTRPUzB4TGpNNE9FZzRNUzQxTmpkakxUQXVOelkzTERBdE1TNHpPRGdzTUM0Mk1qRXRNUzR6T0Rnc01TNHpPRGdOQ2drSmN6QXVOakl5TERFdU16a3NNUzR6T0Rnc01TNHpPVWc1Tmk0ME9Yb2lMejROQ2drOGNHRjBhQ0JrUFNKTk1USXlMalV4T1N3NU5TNDNNakZqTUM0M05qY3NNQ3d4TGpNNE9TMHdMall5TXl3eExqTTRPUzB4TGpNNWN5MHdMall5TWkweExqTTRPQzB4TGpNNE9TMHhMak00T0dndE1UUXVPVEl6WXkwd0xqYzJOeXd3TFRFdU16ZzRMREF1TmpJeExURXVNemc0TERFdU16ZzREUW9KQ1hNd0xqWXlNaXd4TGpNNUxERXVNemc0TERFdU16bElNVEl5TGpVeE9Yb2lMejROQ2drOGNHRjBhQ0JrUFNKTk55NDBNU3c0TUM0NWFEVXpMalEwTW1Nd0xqZzJNeXd3TERFdU5UWXlMVEF1TmprNUxERXVOVFl5TFRFdU5UWXlWak01TGpVME0yTXdMVEF1T0RZeUxUQXVOams1TFRFdU5UWXpMVEV1TlRZeUxURXVOVFl6U0RRMUxqTXhOSFl0Tmk0MU16a05DZ2tKWXpBdE1DNDROakV0TUM0Mk9UZ3RNUzQxTmpJdE1TNDFOakV0TVM0MU5qSklNak11TkRJNFl5MHdMamcyTXl3d0xURXVOVFl5TERBdU55MHhMalUyTWl3eExqVTJNblkyTGpVMFNEY3VOREZqTFRBdU9EWXlMREF0TVM0MU5qSXNNQzQzTFRFdU5UWXlMREV1TlRZemRqTTVMamM1TlEwS0NRbEROUzQ0TkRnc09EQXVNakF4TERZdU5UUTNMRGd3TGprc055NDBNU3c0TUM0NWVpQk5NelF1TkRreUxEVTNMamczTkdndE1TNDNPVFoyTFRZdU56WTRhREV1TnprMlZqVTNMamczTkhvZ1RUSTJMalUyTXl3ek5DNDFOelJvTVRRdU1EVTFkak11TkRBMlNESTJMalUyTTFZek5DNDFOelI2RFFvSkNTQk5NVEF1TlRRMExEUXlMalkzT0dnME55NHhOek4yTVRFdU9UaElNell1T1RReWRpMDBMakF3Tm1Nd0xUQXVPRFl6TFRBdU5qazVMVEV1TlRZekxURXVOVFl5TFRFdU5UWXphQzB6TGpVNE1tTXRNQzQ0TmpNc01DMHhMalUyTWl3d0xqWTVPUzB4TGpVMk1pd3hMalUyTTNZMExqQXdOZzBLQ1FsSU1UQXVOVFEwVmpReUxqWTNPSG9pTHo0TkNnazhjR0YwYUNCa1BTSk5Oamd1TnpNMExEZ3dMamxvTkRrdU9UVTRZekF1T0RBM0xEQXNNUzQwTmkwd0xqWTFNeXd4TGpRMkxURXVORFpXTVRjdU5UTTBZekF0TUM0NE1EWXRNQzQyTlRNdE1TNDBOVGt0TVM0ME5pMHhMalExT1dndE1UUXVOVEkwVmprdU9UWXhEUW9KQ1dNd0xUQXVPREEzTFRBdU5qVXpMVEV1TkRZdE1TNDBOaTB4TGpRMmFDMHhPV010TUM0NE1EY3NNQzB4TGpRMkxEQXVOalV6TFRFdU5EWXNNUzQwTm5ZMkxqRXhOVWcyT0M0M016UmpMVEF1T0RBM0xEQXRNUzQwTml3d0xqWTFNeTB4TGpRMkxERXVORFU1VmpjNUxqUTBEUW9KQ1VNMk55NHlOelFzT0RBdU1qUTNMRFkzTGpreU55dzRNQzQ1TERZNExqY3pOQ3c0TUM0NWVpQk5PRFl1TmpNNExERXlMamc1YURFekxqRXpPWFl6TGpFNE5rZzROaTQyTXpoV01USXVPRGw2SWk4K0RRbzhMMmMrRFFvOEwzTjJaejROQ2c9PQ=="
+    }
+    '''
+
+    # imageData = base64.decode(imageDict["imageData"])
+
+    imageDict["imageData"] = base64.b64decode(imageDict["imageData"])
+
+    return Response(
+        data=imageDict,
+        status=status.HTTP_200_OK
+    )

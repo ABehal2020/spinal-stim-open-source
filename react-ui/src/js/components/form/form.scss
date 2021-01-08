@@ -1,0 +1,102 @@
+.c-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    // border: 1px solid red;
+}
+
+.c-box {
+    width: 39.94px;
+    height: 32px;
+    margin-right: 30px;
+    padding-top: 5px;
+    padding-left: 14px;
+    border: 1px solid #c1c1c1;
+    color: black;
+    background-color: white;
+}
+
+.c-box:hover {
+    color: #1890ff;
+    border-color: #1890ff;
+}
+
+.c-span {
+}
+
+.imgContacts-show {
+    margin-left: 500px;
+    position: relative;
+    margin-bottom: -350px;
+}
+
+.imgContacts-hide {
+    display: none;
+}
+
+.diagram {
+    margin-top: 40px;
+    margin-bottom: 200px;
+    margin-left: 20px;
+    position: absolute;
+    left: -23px;
+    top: 360px;
+    height: 200px;
+    width: auto;
+    padding-top: 20px;
+}
+
+.placement {
+    padding-top: "20px";
+}
+
+.bodyMuscles {
+    position: absolute;
+    width: 800px;
+    top: -20px;
+    left: 320px;
+}
+
+.muscles {
+    width: 300px;
+    position: relative;
+    bottom: 372px;
+    right: 330px;
+}
+
+.toggleButton {
+    position: absolute;
+    // left: 810px;
+    left: 830px;
+    top: 54px;
+    font-size: 16px;
+}
+
+.buttons {
+    font-size: 16px;
+}
+
+.jobStyle {
+    padding-top: 25px;
+    font-size: 16px;
+}
+
+.ant-slider-mark-text {
+    position: absolute;
+    display: inline-block;
+    color: rgba(0, 0, 0, 0.45);
+    text-align: center;
+    word-break: keep-all;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 16px;
+}
+
+.ant-slider-tooltip .ant-tooltip-inner {
+    min-width: unset;
+    font-size: 16px;
+}
