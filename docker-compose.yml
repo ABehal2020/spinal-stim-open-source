@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  backend:
+    build: ./back-end
+    command: python server_side/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./back-end:/code
+    environment:
+      - SECRET_KEY=${SECRET_KEY:?err}
+      - DEBUG=${DEBUG}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+  frontend:
+    build: ./react-ui
+    command: npm start
+    volumes:
+      - ./react-ui:/app
+      # Don't want to use local node modules
+      # https://stackoverflow.com/questions/29181032/add-a-volume-to-docker-but-exclude-a-sub-folder
+      - /app/node_modules/
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend

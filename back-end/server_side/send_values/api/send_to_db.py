@@ -17,9 +17,10 @@ def insert_db(requestDict):
         print(sourceJobID)
 
         if (not sourceJobID):
-            # print(os.getcwd())
+            print(os.getcwd())
             # current working directory: /Users/adityabehal/Desktop/spinal-stim/server_side
-            os.chdir("./send_values/api/matlab")
+            if (os.path.isdir("./send_values/api/matlab") == True):
+                os.chdir("./send_values/api/matlab")
             # savemat("/Users/adityabehal/Desktop/spinal-stim/server_side/send_values/api/matlab/user_input.mat", requestDict, appendmat=False, format='5', long_field_names=True, do_compression=False, oned_as='row')
             savemat("user_input.mat", requestDict, appendmat=False, format='5', long_field_names=True, do_compression=False, oned_as='row')
             eng = matlab.engine.start_matlab()
