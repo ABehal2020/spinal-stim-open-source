@@ -2,6 +2,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/pycharm,visualstudiocode,react,python,matlab
 # Edit at https://www.toptal.com/developers/gitignore?templates=pycharm,visualstudiocode,react,python,matlab
 
+/react-ui/.eslintcache
+
 /back-end/server_side/send_values/api/results/*
 ### MATLAB ###
 # Windows default autosave extension
