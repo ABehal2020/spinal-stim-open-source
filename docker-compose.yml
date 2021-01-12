@@ -7,6 +7,9 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+  # matlab:
+    # build: ./back-end/server_side/send_values/api/matlab/matlab-dockerfile
+  
   backend:
     build: ./back-end
     command: python server_side/manage.py runserver 0.0.0.0:8000
@@ -24,6 +27,7 @@ services:
       - "8000:8000"
     depends_on:
       - db
+      # - matlab
   frontend:
     build: ./react-ui
     command: npm start

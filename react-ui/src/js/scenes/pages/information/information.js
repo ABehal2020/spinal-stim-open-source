@@ -36,7 +36,7 @@ const Overview = () => {
                         <img src={behal} height="140" className="behal"></img>
                         <p>Aditya is a freshman at Rensselaer Polytechnic Institute, planning to major in biology and minor in computer science.
                         He is part of the BS/MD Physician Scientist Program and will matriculate to Albany Medical College after finishing his accelerated three year undergraduate education.
-                        As part of the Pilitis Lab, he programmed the front end (HTML/CSS/JavaScript) and back end (Python/Postgres) of this application along with assisting Dr. Telkes in the generation of the heatmaps in MATLAB.
+                        Working with Dr. Telkes and Dr. Pilitsis, he programmed the front end (HTML/CSS/JavaScript) and back end (Python/Postgres) of this application. He also worked with Dr. Telkes in the generation of the heatmaps in MATLAB and the incorporation of those scripts into the application.
                         </p>
                     </div>
 
@@ -50,10 +50,10 @@ const Overview = () => {
                     </div>
 
                     <div className="author-container">
-                        <h4>Julie G. Pilitis, M.D., Ph.D.</h4>
+                        <h4>Julie G. Pilitsis, M.D., Ph.D.</h4>
                         <img src={pilitsis} className="pilitsis"></img>
                         <p>
-                            Neurosurgeon Dr. Pilitis is the chair of the Department of Neuroscience and Experimental Therapeutics at Albany Medical College.
+                            Neurosurgeon Dr. Pilitsis is the chair of the Department of Neuroscience and Experimental Therapeutics at Albany Medical College.
                             She is also the principal investigator of the Pilitsis Lab.
                         </p>
                     </div>
