@@ -7,12 +7,11 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-  # matlab:
-    # build: ./back-end/server_side/send_values/api/matlab/matlab-dockerfile
-  
+    ports:
+      - "5432:5432"
   backend:
     build: ./back-end
-    command: python server_side/manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./back-end:/code
     environment:
@@ -26,8 +25,15 @@ services:
     ports:
       - "8000:8000"
     depends_on:
+      - migration
       - db
-      # - matlab
+  migration:
+    build: ./back-end
+    command: python manage.py migrate
+    volumes: 
+      - ./back-end:/code
+    depends_on:
+      - db
   frontend:
     build: ./react-ui
     command: npm start

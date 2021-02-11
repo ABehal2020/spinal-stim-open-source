@@ -328,6 +328,17 @@ const FormInterface = (props) => {
             <Col span={4} className="col-md-2"></Col>
             <Col span={20} className="col-md-10">
                 <Form {...layout} form={form} onFinish={inputSave}>
+                    {/* note that min and max parameters and onChange parameters for InputNumber component should be set in the final version */}
+                    {/*
+                    <Form.Item label="Select case number" name="caseNumber" rules={[
+                        {
+                            required: true,
+                            message: 'Please select the case number.',
+                        },
+                    ]}>
+                        <InputNumber value={Number.value}></InputNumber>
+                    </Form.Item>
+                    */}
                     <Form.Item label="Select contact number" name="contactNumber" rules={[
                         {
                             required: true,

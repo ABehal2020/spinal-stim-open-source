@@ -20,7 +20,7 @@ const Header = () => {
                     <span>Welcome!</span>
                 </Col>
                 <Col span={8} className="top-navbar-env-select">
-                <span>GUI for Spinal Cord Stimulation EMG Data Visualization</span>
+                <span>Rapid Visualization Tool for Spinal Cord Stimulation Triggered EMG Mapping</span>
                 </Col>
                 <Col span={8} className="top-navbar-migrate">
                     <Clock></Clock>
