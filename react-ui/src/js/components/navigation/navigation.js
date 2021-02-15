@@ -1,5 +1,6 @@
 import React from 'react';
 import { Layout, Menu, } from 'antd';
+import { refreshPageLazy } from '../form/form';
 import './navigation.scss';
 
 export default class Navigation extends React.Component {
@@ -39,6 +40,9 @@ export default class Navigation extends React.Component {
                 path:event.key,
         };
         console.log(o);
+        if (o.navKey == "Generate") {
+            refreshPageLazy();
+        }
         this.props.showPage(o.path, o.navKey)
     }
 

@@ -7,6 +7,7 @@ let initStore = {
     file_name: "heatmap",
     submission_data: {
         "jobID": "",
+        "caseNum": "",
         "contactNum": "",
         "currentVal": "",
         "bodySide": "",

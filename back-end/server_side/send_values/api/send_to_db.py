@@ -10,6 +10,7 @@ def get_base64_encoded_image(image_path):
 
 def insert_db(requestDict):
     sourceJobID = SpinalStimData.objects.filter(
+        caseNum=requestDict["caseNum"],
         contactNum=requestDict["contactNum"],
         currentVal=requestDict["currentVal"],
         bodySide=requestDict["bodySide"],
@@ -26,8 +27,8 @@ def insert_db(requestDict):
     print(sourceJobID)
 
     if not sourceJobID:
-        caseNumber = 4
         jobID = requestDict["jobID"]
+        caseNumber = requestDict["caseNum"]
         contactNum = requestDict["contactNum"]
         selectedCurrent = float(requestDict["currentVal"])
         bodySide = requestDict["bodySide"]

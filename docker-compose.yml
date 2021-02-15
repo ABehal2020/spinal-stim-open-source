@@ -29,7 +29,7 @@ services:
       - db
   migration:
     build: ./back-end
-    command: python manage.py migrate
+    command: bash -c "python manage.py makemigrations && python manage.py migrate"
     volumes: 
       - ./back-end:/code
     depends_on:

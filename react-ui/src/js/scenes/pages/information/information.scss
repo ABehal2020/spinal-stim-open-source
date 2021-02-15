@@ -31,6 +31,10 @@ img {
     padding-bottom: 20px;
 }
 
+.references > p {
+    font-size: 12px;
+}
+
 .behal {
     justify-content: center;
     // preserves image aspect ratio
@@ -39,6 +43,12 @@ img {
 }
 
 .telkes {
+    justify-content: center;
+    object-fit: contain;
+    height: 200px;
+}
+
+.hadanny {
     justify-content: center;
     object-fit: contain;
     height: 200px;

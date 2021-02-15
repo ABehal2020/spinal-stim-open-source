@@ -30,6 +30,7 @@ def postData(request):
     requestDict = request.data
 
     jobID = requestDict["jobID"]
+    caseNum = requestDict["caseNum"]
     contactNum = requestDict["contactNum"]
     currentVal = float(requestDict["currentVal"])
     bodySide = requestDict["bodySide"]

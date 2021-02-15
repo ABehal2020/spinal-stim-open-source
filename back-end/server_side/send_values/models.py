@@ -4,6 +4,7 @@ from django.db import models
 
 class SpinalStimData(models.Model):
     jobID = models.CharField(max_length=100)
+    caseNum = models.PositiveIntegerField(default=0)
     contactNum = models.PositiveIntegerField()
     currentVal = models.FloatField()
     bodySide = models.CharField(max_length=100)
@@ -19,8 +20,8 @@ class SpinalStimData(models.Model):
         ordering = ('jobID',)
 
     def __unicode__(self):
-        if not (self.jobID or self.contactNum or self.currentVal or self.bodySide or self.contactSymmetry or self.signalingProcMethod or self.normalizationMethod or self.colormapOption or self.original or self.sourceJobID):
+        if not (self.jobID or self.caseNum or self.contactNum or self.currentVal or self.bodySide or self.contactSymmetry or self.signalingProcMethod or self.normalizationMethod or self.colormapOption or self.original or self.sourceJobID):
             return u'One or more of the fields is missing'
         else:
-            return u'Job Id: %s, Contact Number: %d, Current Value: %f, Body Side: %s, Contact Symetry: %s, Signal Processing Method: %s, Normalization Method: %s, Colormap Option: %s, Original: %r, Source: %s' \
-                   % (self.jobID, self.contactNum, self.currentVal, self.bodySide, self.contactSymmetry, self.signalingProcMethod, self.normalizationMethod, self.colormapOption, self.original, self.sourceJobID)
+            return u'Job Id: %s, Case Number: %d, Contact Number: %d, Current Value: %f, Body Side: %s, Contact Symetry: %s, Signal Processing Method: %s, Normalization Method: %s, Colormap Option: %s, Original: %r, Source: %s' \
+                   % (self.jobID, self.caseNum, self.contactNum, self.currentVal, self.bodySide, self.contactSymmetry, self.signalingProcMethod, self.normalizationMethod, self.colormapOption, self.original, self.sourceJobID)

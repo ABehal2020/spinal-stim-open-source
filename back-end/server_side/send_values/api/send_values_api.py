@@ -7,10 +7,10 @@ from ..models import SpinalStimData
 class SpinalStimDataSerializer(ModelSerializer):
     class Meta:
         model = SpinalStimData
-        fields = ['jobID', 'contactNum', 'currentVal', 'bodySide', 'contactSymmetry', 'signalingProcMethod', 'normalizationMethod', 'colormapOption', 'imageData', 'original', 'sourceJobID']
+        fields = ['jobID', 'caseNum', 'contactNum', 'currentVal', 'bodySide', 'contactSymmetry', 'signalingProcMethod', 'normalizationMethod', 'colormapOption', 'imageData', 'original', 'sourceJobID']
 
     def validate(self, user_data):
-        if not (user_data['jobID'] or user_data['contactNum'] or user_data['currentVal'] or user_data['bodySide'] or user_data['contactSymmetry'] or user_data['signalingProcMethod'] or user_data['normalizationMethod'] or user_data['colormapOption'] or user_data['original'] or user_data['sourceJobID']):
+        if not (user_data['jobID'] or user_data['caseNum'] or user_data['contactNum'] or user_data['currentVal'] or user_data['bodySide'] or user_data['contactSymmetry'] or user_data['signalingProcMethod'] or user_data['normalizationMethod'] or user_data['colormapOption'] or user_data['original'] or user_data['sourceJobID']):
             print('One or more of the fields is missing.')
             return ValidationError
         return user_data
@@ -21,7 +21,7 @@ class SpinalStimDataSerializer(ModelSerializer):
         return new_input
 
     def update(self, existing_input, user_data):
-        fields = ['jobID', 'contactNum', 'currentVal', 'bodySide', 'contactSymmetry', 'signalingProcMethod', 'normalizationMethod', 'colormapOption', 'imageData', 'original', 'sourceJobID']
+        fields = ['jobID', 'caseNum', 'contactNum', 'currentVal', 'bodySide', 'contactSymmetry', 'signalingProcMethod', 'normalizationMethod', 'colormapOption', 'imageData', 'original', 'sourceJobID']
         for i in fields:
             field_value = user_data.get(i, getattr(existing_input, i))
             setattr(existing_input, i, field_value)
@@ -33,4 +33,4 @@ class SpinalStimDataViewSet(ModelViewSet):
     http_method_names = ['get', 'post', 'put', 'delete', 'options']
     queryset = SpinalStimData.objects.all()
     filter_backends = (DjangoFilterBackend,)
-    filterset_fields = ('jobID', 'contactNum', 'currentVal', 'bodySide', 'contactSymmetry', 'signalingProcMethod', 'normalizationMethod', 'colormapOption', 'original', 'sourceJobID')
+    filterset_fields = ('jobID', 'caseNum', 'contactNum', 'currentVal', 'bodySide', 'contactSymmetry', 'signalingProcMethod', 'normalizationMethod', 'colormapOption', 'original', 'sourceJobID')

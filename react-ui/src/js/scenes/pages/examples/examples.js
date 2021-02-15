@@ -4,10 +4,8 @@ import formReducer from '../../../reducers/formReducer';
 import FormInterface from '../../../components/form/form';
 import LookUp from '../../../components/lookUp/lookUp';
 import { formAction, startSpinner, placeholderAction, getImageDataAction, getLookUpAction, getFileNameAction } from '../../../actions/formAction';
-import hot from '../../../images/hot.svg';
-import bluewhitered from '../../../images/bluewhitered-old.svg';
 import gray from '../../../images/gray.svg';
-import turbo from '../../../images/turbo-old.svg';
+import hot from '../../../images/hot.svg';
 import jet from '../../../images/jet.svg';
 import parula from '../../../images/parula.svg';
 import './examples.scss';
@@ -150,11 +148,11 @@ export const Examples = (props) => {
                 */}
                 <div className="parula">
                     <h1>Parula Colormap</h1>
-                    <img src={parula}></img>
+                    <img src={parula} width="800"></img>
                 </div>
                 <div className="hot">
                     <h1>Hot Colormap</h1>
-                    <img src={hot}></img>
+                    <img src={hot} width="800"></img>
                 </div>
                 {/*
                 <div className="bluewhitered">
@@ -164,11 +162,11 @@ export const Examples = (props) => {
                 */}
                 <div className="jet">
                     <h1>Jet Colormap</h1>
-                    <img src={jet}></img>
+                    <img src={jet} width="800"></img>
                 </div>
                 <div className="gray">
                     <h1>Gray Colormap</h1>
-                    <img src={gray}></img>
+                    <img src={gray} width="800"></img>
                 </div>
             </div>
         </div>

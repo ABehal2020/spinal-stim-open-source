@@ -171,6 +171,7 @@ const FormInterface = (props) => {
         server_message: "",
         submission_data: {
             "jobID": "",
+            "caseNum": "",
             "contactNum": "",
             "currentVal": "",
             "bodySide": "",
@@ -191,6 +192,7 @@ const FormInterface = (props) => {
         form.resetFields();
     };
 
+    const [caseNum, setCaseNum] = useState("");
     const [contactNum, setContactNum] = useState("");
     const [currentVal, setCurrentVal] = useState("");
     const [bodySide, setBodySide] = useState("");
@@ -206,6 +208,11 @@ const FormInterface = (props) => {
     const [dynamicDisable, setDynamicDisable] = useState(false);
     const [dynamicNewDisable, setNewDynamicDisable] = useState(false);
     const [dynamicBodyImage, setDynamicBodyImage] = useState(labelledBody);
+
+    const handleChangeCaseNumber = (event) => {
+        setCaseNum(event.target.value);
+        console.log(caseNum);
+    }
 
     const handleChangeContactNumber = (event) => {
         setContactNum(event.target.value);
@@ -283,6 +290,7 @@ const FormInterface = (props) => {
         let ob = { "content-type": "application/json" };
         let data = {
             "jobID": jobID,
+            "caseNum": caseNum,
             "contactNum": contactNum,
             "currentVal": currentVal,
             "bodySide": bodySide,
@@ -307,6 +315,7 @@ const FormInterface = (props) => {
 
     const inputSave = () => {
         console.log(jobID);
+        console.log(caseNum);
         console.log(contactNum);
         console.log(currentVal);
         console.log(bodySide);
@@ -336,9 +345,22 @@ const FormInterface = (props) => {
                             message: 'Please select the case number.',
                         },
                     ]}>
-                        <InputNumber value={Number.value}></InputNumber>
+                        <InputNumber min={2} max={9} value={Number.value}></InputNumber>
                     </Form.Item>
                     */}
+                    <Form.Item label="Select case number" name="caseNumber" rules={[
+                        {
+                            required: true,
+                            message: 'Please select the case number.',
+                        },
+                    ]}>
+                        <Radio.Group onChange={handleChangeCaseNumber} disabled={dynamicDisable}>
+                            <Radio value="2">2</Radio>
+                            <Radio value="4">4</Radio>
+                            <Radio value="5">5</Radio>
+                            <Radio value="9">9</Radio>
+                        </Radio.Group>
+                    </Form.Item>
                     <Form.Item label="Select contact number" name="contactNumber" rules={[
                         {
                             required: true,
@@ -540,6 +562,10 @@ const FormInterface = (props) => {
             </Col>
         </div >
     )
+}
+
+export const refreshPageLazy = () => {
+    window.location.reload();
 }
 
 export default FormInterface;
