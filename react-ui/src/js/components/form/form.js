@@ -485,7 +485,7 @@ const FormInterface = (props) => {
                         <Radio.Group onChange={handleChangeSignalProcessingMethod} disabled={dynamicDisable}>
                             <Radio value="peak">Peak to Peak</Radio>
                             <Radio value="rms">Root Mean Square</Radio>
-                            <Radio value="max">Maximum Peak Value</Radio>
+                            <Radio value="max">Maximum Value</Radio>
                         </Radio.Group>
                     </Form.Item>
                     {/*
