@@ -8,3 +8,4 @@ git clone https://github.com/ABehal2020/spinal-stim-open-source.git
 cd spinal-stim-open-source
 docker-compose up
 ```
+Open Google Chrome and go to http://localhost:3000 to use the application.
